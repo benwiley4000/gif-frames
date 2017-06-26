@@ -1,4 +1,5 @@
 var path = require('path');
+var MultiRange = require('multi-integer-range').MultiRange;
 var getPixels = require('get-pixels');
 var savePixels = require('save-pixels');
 
@@ -45,8 +46,15 @@ function gifFrames (options, callback) {
     reject(new Error('"url" option is required.'));
     return;
   }
+  var frames = options.frames;
+  if (!frames && frames !== 0) {
+    reject(new Error('"frames" option is required.'));
+    return;
+  }
   var outputType = options.outputType || 'jpg';
   var quality = options.quality;
+
+  var acceptedFrames = new MultiRange(frames);
 
   getPixels(url, 'image/gif', function (err, pixels) {
     if (err) {
@@ -59,6 +67,9 @@ function gifFrames (options, callback) {
     }
     var frameData = [];
     for (var i = 0; i < pixels.shape[0]; i++) {
+      if (!acceptedFrames.has(i)) {
+        continue;
+      }
       (function (frameIndex) {
         frameData.push({
           getImageStream: function () {

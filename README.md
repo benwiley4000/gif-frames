@@ -13,8 +13,10 @@ npm install gif-frames
 ### Options:
 
 * `url` (**required**): The pathname to the file, or an [in-memory Buffer](http://nodejs.org/api/buffer.html)
-* ***TODO:*** `frames` (**required**): The set of frames to extract (currently extracts all)
-* `outputType` (*optional*, default "jpg"): Type to use for output (see [`type`](https://github.com/scijs/save-pixels#requiresave-pixelsarray-type-options) for `save-pixels`)
+* `frames` (**required**): The set of frames to extract. Can be one of:
+  - `'all'` (gets every frame)
+  - Any valid [`Initializer`](https://github.com/smikitky/node-multi-integer-range#initializers) accepted by the [multi-integer-range library](https://github.com/smikitky/node-multi-integer-range)
+* `outputType` (*optional*, default `'jpg'`): Type to use for output (see [`type`](https://github.com/scijs/save-pixels#requiresave-pixelsarray-type-options) for `save-pixels`)
 * `quality` (*optional*): Jpeg quality (see [`quality`](https://github.com/scijs/save-pixels#requiresave-pixelsarray-type-options) for `save-pixels`)
 
 The callback accepts the arguments `(error, frameData)`.
@@ -36,23 +38,25 @@ An array of objects of the form:
 
 ## Examples
 
-Writing each frame to file in Node:
+Writing selected frames to the file system in Node:
 
 ```javascript
 var gifFrames = require('gif-frames');
 var fs = require('fs');
 
-gifFrames({ url: 'image.gif', outputType: 'png' }, function (err, frameData) {
-  if (err) {
-    console.error(err);
-    return;
+gifFrames(
+  { url: 'image.gif', frames: '0-2,7', outputType: 'png' },
+  function (err, frameData) {
+    if (err) {
+      throw err;
+    }
+    frameData.forEach(function (frame) {
+      frame.getImageStream().pipe(fs.createWriteStream(
+        'image-' + frame.frameIndex + '.png'
+      ));
+    });
   }
-  frameData.forEach(function (frame) {
-    frame.getImageStream().pipe(fs.createWriteStream(
-      'image-' + frame.frameIndex + '.png'
-    ));
-  });
-});
+);
 ```
 
 Drawing first frame to canvas in browser (and using a `Promise`):
@@ -60,7 +64,7 @@ Drawing first frame to canvas in browser (and using a `Promise`):
 ```javascript
 var gifFrames = require('gif-frames');
 
-gifFrames({ url: 'image.gif', outputType: 'canvas' })
+gifFrames({ url: 'image.gif', frames: 0, outputType: 'canvas' })
   .then(function (frameData) {
     var canvas = document.createElement('canvas');
     document.body.appendChild(canvas);
