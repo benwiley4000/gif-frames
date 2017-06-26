@@ -19,6 +19,7 @@ function padNumber (num, size) {
 
 function gifFrames (options, callback) {
   options = options || {};
+  callback = callback || function () {};
   var input = options.input;
   if (!input) {
     callback(new Error('"input" option is required.'));
