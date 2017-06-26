@@ -67,7 +67,7 @@ function gifFrames (options, callback) {
     }
     var frameData = [];
     for (var i = 0; i < pixels.shape[0]; i++) {
-      if (!acceptedFrames.has(i)) {
+      if (frames !== 'all' && !acceptedFrames.has(i)) {
         continue;
       }
       (function (frameIndex) {
