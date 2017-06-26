@@ -1,6 +1,6 @@
 {
   "name": "gif-frames",
-  "version": "0.2.2",
+  "version": "0.2.3",
   "description": "Pure JavaScript tool for extracting GIF frames and saving to file",
   "main": "gif-frames.js",
   "scripts": {
