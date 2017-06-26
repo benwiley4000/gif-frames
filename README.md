@@ -36,7 +36,7 @@ An array of objects of the form:
 
 ## Examples
 
-Writing to file in Node:
+Writing each frame to file in Node:
 
 ```javascript
 var gifFrames = require('gif-frames');
@@ -55,21 +55,15 @@ gifFrames({ url: 'image.gif', outputType: 'png' }, function (err, frameData) {
 });
 ```
 
-Writing to canvas in the browser (and using a `Promise`):
+Drawing first frame to canvas in browser (and using a `Promise`):
 
 ```javascript
 var gifFrames = require('gif-frames');
 
 gifFrames({ url: 'image.gif', outputType: 'canvas' })
   .then(function (frameData) {
-    frameData.forEach(function (frame) {
-      var canvas = document.createElement('canvas');
-      canvas.id = 'frame-' + frame.frameIndex;
-      document.body.appendChild(canvas);
-      frame.getImageStream().pipe(canvas);
-    });
-  })
-  .catch(function (err) {
-    console.error(err);
+    var canvas = document.createElement('canvas');
+    document.body.appendChild(canvas);
+    frameData[0].getImageStream().pipe(canvas);
   });
 ```
