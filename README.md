@@ -65,5 +65,5 @@ gifFrames({ url: 'image.gif', outputType: 'canvas' })
     var canvas = document.createElement('canvas');
     document.body.appendChild(canvas);
     frameData[0].getImageStream().pipe(canvas);
-  });
+  }).catch(console.error.bind(console));
 ```
