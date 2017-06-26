@@ -1,0 +1,32 @@
+{
+  "name": "gif-frames",
+  "version": "0.1.0",
+  "description": "Pure JavaScript tool for extracting GIF frames and saving to file",
+  "main": "gif-frames.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/benwiley4000/gif-frames.git"
+  },
+  "keywords": [
+    "gif",
+    "frames",
+    "extract",
+    "save",
+    "images",
+    "javascript",
+    "pure-js"
+  ],
+  "author": "Ben Wiley",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/benwiley4000/gif-frames/issues"
+  },
+  "homepage": "https://github.com/benwiley4000/gif-frames#readme",
+  "dependencies": {
+    "get-pixels": "^3.3.0",
+    "save-pixels": "^2.3.4"
+  }
+}
