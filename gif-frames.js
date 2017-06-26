@@ -54,7 +54,7 @@ function gifFrames (options, callback) {
   var outputType = options.outputType || 'jpg';
   var quality = options.quality;
 
-  var acceptedFrames = new MultiRange(frames);
+  var acceptedFrames = frames === 'all' ? 'all' : new MultiRange(frames);
 
   getPixels(url, 'image/gif', function (err, pixels) {
     if (err) {
@@ -67,7 +67,7 @@ function gifFrames (options, callback) {
     }
     var frameData = [];
     for (var i = 0; i < pixels.shape[0]; i++) {
-      if (frames !== 'all' && !acceptedFrames.has(i)) {
+      if (acceptedFrames !== 'all' && !acceptedFrames.has(i)) {
         continue;
       }
       (function (frameIndex) {
