@@ -2,6 +2,8 @@
 
 A pure JavaScript tool for extracting GIF frames and saving to file. Works in Node or the browser. Uses [get-pixels](https://github.com/scijs/get-pixels) and [save-pixels](https://github.com/scijs/save-pixels) under the hood.
 
+[![NPM](https://nodei.co/npm/gif-frames.png)](https://npmjs.org/package/gif-frames)
+
 ## Install
 
 ```bash
