@@ -10,6 +10,15 @@ npm install gif-frames
 
 ## `require('gif-frames')(options[, callback])`
 
+```javascript
+var gifFrames = require('gif-frames');
+var fs = require('fs');
+
+gifFrames({ url: 'image.gif', frames: 0 }).then(function (frameData) {
+  frameData[0].getImageStream().pipe(fs.createWriteStream('firstframe.jpg'));
+});
+```
+
 ### Options:
 
 * `url` (**required**): The pathname to the file, or an [in-memory Buffer](http://nodejs.org/api/buffer.html)
