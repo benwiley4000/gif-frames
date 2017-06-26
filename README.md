@@ -17,7 +17,7 @@ var gifFrames = require('gif-frames');
 var fs = require('fs');
 
 gifFrames({ url: 'image.gif', frames: 0 }).then(function (frameData) {
-  frameData[0].getImageStream().pipe(fs.createWriteStream('firstframe.jpg'));
+  frameData[0].getImage().pipe(fs.createWriteStream('firstframe.jpg'));
 });
 ```
 
@@ -42,10 +42,20 @@ An array of objects of the form:
 
 ```javascript
 {
-  getImageStream,
+  getImage,
   frameIndex
 }
 ```
+
+### `getImage()`
+
+Returns one of:
+* A drawn canvas DOM element, if `options.outputType` is `'canvas'`
+* A data stream which can be piped to file output, otherwise
+
+###  `frameIndex`
+
+The index corresponding to the frame's position in the original GIF (not necessarily the same as the frame's position in the result array)
 
 ## Examples
 
@@ -62,7 +72,7 @@ gifFrames(
       throw err;
     }
     frameData.forEach(function (frame) {
-      frame.getImageStream().pipe(fs.createWriteStream(
+      frame.getImage().pipe(fs.createWriteStream(
         'image-' + frame.frameIndex + '.png'
       ));
     });
@@ -77,8 +87,6 @@ var gifFrames = require('gif-frames');
 
 gifFrames({ url: 'image.gif', frames: 0, outputType: 'canvas' })
   .then(function (frameData) {
-    var canvas = document.createElement('canvas');
-    document.body.appendChild(canvas);
-    frameData[0].getImageStream().pipe(canvas);
+    document.body.appendChild(frameData[0].getImage());
   }).catch(console.error.bind(console));
 ```

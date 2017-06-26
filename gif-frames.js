@@ -75,7 +75,7 @@ function gifFrames (options, callback) {
       }
       (function (frameIndex) {
         frameData.push({
-          getImageStream: function () {
+          getImage: function () {
             return savePixels(pixels.pick(frameIndex), outputType, {
               quality: quality
             });
