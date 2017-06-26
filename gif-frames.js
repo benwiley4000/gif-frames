@@ -44,12 +44,12 @@ function gifFrames (options, callback) {
   var url = options.url;
   if (!url) {
     reject(new Error('"url" option is required.'));
-    return;
+    return promise;
   }
   var frames = options.frames;
   if (!frames && frames !== 0) {
     reject(new Error('"frames" option is required.'));
-    return;
+    return promise;
   }
   var outputType = options.outputType || 'jpg';
   var quality = options.quality;
