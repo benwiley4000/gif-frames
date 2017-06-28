@@ -10,6 +10,21 @@ A pure JavaScript tool for extracting GIF frames and saving to file. Works in No
 npm install gif-frames
 ```
 
+### CDN scripts
+
+If you're not using npm, you can include one of these in your HTML file:
+
+* [https://unpkg.com/gif-frames?main=browser](https://unpkg.com/gif-frames?main=browser) (Unminified)
+* [https://unpkg.com/gif-frames?main=browser-min](https://unpkg.com/gif-frames?main=browser-min) (Minified)
+
+```html
+<!-- unminified -->
+<script src="https://unpkg.com/gif-frames@0.3.0?main=browser"></script>
+
+<!-- minified -->
+<script src="https://unpkg.com/gif-frames@0.3.0?main=browser-min"></script>
+```
+
 ## `require('gif-frames')(options[, callback])`
 
 ```javascript
