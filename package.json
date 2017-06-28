@@ -11,6 +11,7 @@
     "build:uglify": "uglifyjs dist/gif-frames.js -o dist/gif-frames.min.js",
     "build": "npm run build:clean && npm run build:umd && npm run build:uglify",
     "dev": "mkdirp dist && watchify gif-frames.js -o dist/gif-frames.js -s gifFrames",
+    "prepublish": "npm run build",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
