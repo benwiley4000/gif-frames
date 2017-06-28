@@ -25,6 +25,8 @@ If you're not using npm, you can include one of these in your HTML file:
 <script src="https://unpkg.com/gif-frames@0.3.0?main=browser-min"></script>
 ```
 
+This will expose `gifFrames` as a global variable.
+
 ## `require('gif-frames')(options[, callback])`
 
 ```javascript
