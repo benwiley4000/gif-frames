@@ -26,8 +26,8 @@
   },
   "homepage": "https://github.com/benwiley4000/gif-frames#readme",
   "dependencies": {
-    "get-pixels": "^3.3.0",
+    "get-pixels": "git+https://github.com/benwiley4000/get-pixels.git#jpeg-js-upgrade",
     "multi-integer-range": "^3.0.0",
-    "save-pixels": "^2.3.4"
+    "save-pixels": "git+https://github.com/benwiley4000/save-pixels.git#jpeg-js-upgrade"
   }
 }
