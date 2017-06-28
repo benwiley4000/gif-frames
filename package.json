@@ -4,6 +4,11 @@
   "description": "Pure JavaScript tool for extracting GIF frames and saving to file",
   "main": "gif-frames.js",
   "scripts": {
+    "build:clean": "rimraf dist && mkdirp dist",
+    "build:umd": "browserify gif-frames.js -o dist/gif-frames.js -s gifFrames",
+    "build:uglify": "uglifyjs dist/gif-frames.js -o dist/gif-frames.min.js",
+    "build": "npm run build:clean && npm run build:umd && npm run build:uglify",
+    "dev": "mkdirp dist && watchify gif-frames.js -o dist/gif-frames.js -s gifFrames",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -26,8 +31,15 @@
   },
   "homepage": "https://github.com/benwiley4000/gif-frames#readme",
   "dependencies": {
-    "get-pixels": "^3.3.0",
+    "get-pixels": "git+https://github.com/benwiley4000/get-pixels.git#jpeg-js-upgrade",
     "multi-integer-range": "^3.0.0",
-    "save-pixels": "^2.3.4"
+    "save-pixels": "git+https://github.com/benwiley4000/save-pixels.git#jpeg-js-upgrade"
+  },
+  "devDependencies": {
+    "browserify": "^14.4.0",
+    "mkdirp": "^0.5.1",
+    "rimraf": "^2.6.1",
+    "uglify-js": "^3.0.20",
+    "watchify": "^3.9.0"
   }
 }
