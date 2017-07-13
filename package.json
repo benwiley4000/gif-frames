@@ -34,9 +34,9 @@
   },
   "homepage": "https://github.com/benwiley4000/gif-frames#readme",
   "dependencies": {
-    "get-pixels": "git+https://github.com/benwiley4000/get-pixels.git#jpeg-js-upgrade",
+    "get-pixels-jpeg-js-upgrade": "^3.3.0-jpeg-js-upgrade.0",
     "multi-integer-range": "^3.0.0",
-    "save-pixels": "git+https://github.com/benwiley4000/save-pixels.git#jpeg-js-upgrade"
+    "save-pixels-jpeg-js-upgrade": "^2.3.4-jpeg-js-upgrade.0"
   },
   "devDependencies": {
     "browserify": "^14.4.0",
