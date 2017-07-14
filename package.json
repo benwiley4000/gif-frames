@@ -3,8 +3,8 @@
   "version": "0.2.4",
   "description": "Pure JavaScript tool for extracting GIF frames and saving to file",
   "main": "gif-frames.js",
-  "browser": "dist/gif-frames.js",
-  "browser-min": "dist/gif-frames.min.js",
+  "bundled": "dist/gif-frames.js",
+  "bundled-min": "dist/gif-frames.min.js",
   "scripts": {
     "build:clean": "rimraf dist && mkdirp dist",
     "build:umd": "browserify gif-frames.js -o dist/gif-frames.js -s gifFrames",

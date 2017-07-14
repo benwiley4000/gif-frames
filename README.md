@@ -14,15 +14,15 @@ npm install gif-frames
 
 If you're not using npm, you can include one of these in your HTML file:
 
-* [https://unpkg.com/gif-frames?main=browser](https://unpkg.com/gif-frames?main=browser) (Unminified)
-* [https://unpkg.com/gif-frames?main=browser-min](https://unpkg.com/gif-frames?main=browser-min) (Minified)
+* [https://unpkg.com/gif-frames?main=bundled](https://unpkg.com/gif-frames?main=bundled) (Unminified)
+* [https://unpkg.com/gif-frames?main=bundled-min](https://unpkg.com/gif-frames?main=bundled-min) (Minified)
 
 ```html
 <!-- unminified -->
-<script src="https://unpkg.com/gif-frames@0.3.0?main=browser"></script>
+<script src="https://unpkg.com/gif-frames@0.3.0?main=bundled"></script>
 
 <!-- minified -->
-<script src="https://unpkg.com/gif-frames@0.3.0?main=browser-min"></script>
+<script src="https://unpkg.com/gif-frames@0.3.0?main=bundled-min"></script>
 ```
 
 This will expose `gifFrames` as a global variable.
