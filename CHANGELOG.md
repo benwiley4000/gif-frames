@@ -5,6 +5,11 @@ The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/)
 and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+### Added
+- Unminified and minified [browser bundles](https://github.com/benwiley4000/gif-frames/blob/master/README.md#cdn-scripts) which will expose the library as a global called `gifFrames` - for those not using npm.
+
+### Changed
+- Now relying on (hopefully short-term) forks of [get-pixels](https://www.npmjs.com/package/get-pixels-jpeg-js-upgrade) and [save-pixels](https://www.npmjs.com/package/save-pixels-jpeg-js-upgrade), published to npm. These allow us to run UglifyJS for our minified build, and maintain compatibility with older browsers (the previous jpeg-js dependency [relied on ES2015+ features](https://github.com/eugeneware/jpeg-js/pull/26)).
 
 ## [0.2.4] - 2017-06-26
 ### Added
