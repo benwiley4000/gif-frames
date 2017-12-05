@@ -6,6 +6,9 @@ and this project adheres to [Semantic Versioning](http://semver.org/spec/v2.0.0.
 
 ## [Unreleased]
 
+### Added
+- `cumulative` option for computing frames by layering on top of prior frames
+
 ## [0.3.0] - 2017-07-13
 ### Added
 - Unminified and minified [browser bundles](https://github.com/benwiley4000/gif-frames/blob/master/README.md#cdn-scripts) which will expose the library as a global called `gifFrames` - for those not using npm.

@@ -46,6 +46,7 @@ gifFrames({ url: 'image.gif', frames: 0 }).then(function (frameData) {
   - Any valid [`Initializer`](https://github.com/smikitky/node-multi-integer-range#initializers) accepted by the [multi-integer-range library](https://github.com/smikitky/node-multi-integer-range)
 * `outputType` (*optional*, default `'jpg'`): Type to use for output (see [`type`](https://github.com/scijs/save-pixels#requiresave-pixelsarray-type-options) for `save-pixels`)
 * `quality` (*optional*): Jpeg quality (see [`quality`](https://github.com/scijs/save-pixels#requiresave-pixelsarray-type-options) for `save-pixels`)
+* `cumulative` (*optional*, default `false`): Many animated GIFS will only contain partial image information in each frame after the first. Specifying `cumulative` as `true` will compute each frame by layering it on top of previous frames. *Note: the cost of this computation is proportional to the size of the last requested frame index.*
 
 The callback accepts the arguments `(error, frameData)`.
 
@@ -83,7 +84,7 @@ var gifFrames = require('gif-frames');
 var fs = require('fs');
 
 gifFrames(
-  { url: 'image.gif', frames: '0-2,7', outputType: 'png' },
+  { url: 'image.gif', frames: '0-2,7', outputType: 'png', cumulative: true },
   function (err, frameData) {
     if (err) {
       throw err;
