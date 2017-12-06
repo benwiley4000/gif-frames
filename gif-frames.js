@@ -1,4 +1,3 @@
-var path = require('path');
 var MultiRange = require('multi-integer-range').MultiRange;
 var getPixels = require('get-pixels-jpeg-js-upgrade');
 var savePixels = require('save-pixels-jpeg-js-upgrade');
