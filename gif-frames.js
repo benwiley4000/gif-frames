@@ -78,7 +78,7 @@ function gifFrames (options, callback) {
       (function (frameIndex) {
         frameData.push({
           getImage: function () {
-            if (cumulative) {
+            if (cumulative && frameIndex > maxAccumulatedFrame) {
               // for each frame, replace any invisible pixel with
               // the corresponding pixel from the previous frame (beginning
               // with the second frame).
