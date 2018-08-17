@@ -43,6 +43,6 @@
     "mkdirp": "^0.5.1",
     "rimraf": "^2.6.1",
     "uglify-js": "^3.0.20",
-    "watchify": "^3.9.0"
+    "watchify": "^3.11.0"
   }
 }
