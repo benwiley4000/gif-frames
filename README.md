@@ -75,6 +75,28 @@ Returns one of:
 
 The index corresponding to the frame's position in the original GIF (not necessarily the same as the frame's position in the result array)
 
+###  `frameInfo`
+
+It is an Object with metadata of the frame. Fields:
+
+Name|Type|Description
+----|-----|-----------
+x | Integer | Image Left Position
+y | Integer | Image Top Position
+width | Integer | Image Width
+height | Integer | Image Height
+has_local_palette | Boolean | Image local palette presentation flag
+palette_offset | Integer | Image palette offset
+palette_size | Integer | Image palette size
+data_offset | Integer | Image data offset
+data_length | Integer | Image data length
+transparent_index | Integer | Transparent Color Index
+interlaced | Boolean | Interlace Flag
+delay | Integer | Delay Time (1/100ths of a second)
+disposal | Integer | Disposal method
+
+See GIF spec for details. Summary http://www.onicos.com/staff/iz/formats/gif.html
+
 ## Examples
 
 Writing selected frames to the file system in Node:
