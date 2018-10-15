@@ -61,7 +61,8 @@ An array of objects of the form:
 ```javascript
 {
   getImage,
-  frameIndex
+  frameIndex,
+  frameInfo
 }
 ```
 
@@ -95,7 +96,7 @@ interlaced | Boolean | Interlace Flag
 delay | Integer | Delay Time (1/100ths of a second)
 disposal | Integer | Disposal method
 
-See GIF spec for details. Summary http://www.onicos.com/staff/iz/formats/gif.html
+See [GIF spec for details](http://www.onicos.com/staff/iz/formats/gif.html)
 
 ## Examples
 
