@@ -39,7 +39,7 @@
     "save-pixels-jpeg-js-upgrade": "^2.3.4-jpeg-js-upgrade.0"
   },
   "devDependencies": {
-    "browserify": "^14.4.0",
+    "browserify": "^16.2.3",
     "mkdirp": "^0.5.1",
     "rimraf": "^2.6.1",
     "uglify-js": "^3.0.20",
