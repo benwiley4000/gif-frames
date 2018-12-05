@@ -19,10 +19,10 @@ If you're not using npm, you can include one of these in your HTML file:
 
 ```html
 <!-- unminified -->
-<script src="https://unpkg.com/gif-frames@0.4.0?main=bundled"></script>
+<script src="https://unpkg.com/gif-frames@1.0.1?main=bundled"></script>
 
 <!-- minified -->
-<script src="https://unpkg.com/gif-frames@0.4.0?main=bundled-min"></script>
+<script src="https://unpkg.com/gif-frames@1.0.1?main=bundled-min"></script>
 ```
 
 This will expose `gifFrames` as a global variable.
