@@ -1,5 +1,6 @@
 import {Initializer} from "multi-integer-range";
-import {Canvas} from "canvas"
+import {Canvas} from "canvas";
+import stream from "stream";
 
 declare module "gif-frames" {
 
@@ -24,7 +25,7 @@ declare module "gif-frames" {
     }
 
     interface GifFrameDataStream {
-        getImage(): ReadableStream;
+        getImage(): stream.Readable;
         frameIndex: number;
         frameInfo: GifFrameInfo
     }
