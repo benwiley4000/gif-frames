@@ -11,7 +11,7 @@ declare module "gif-frames" {
 
     interface GifFrameOptions {
         url: string | Buffer;
-        frame: "all" | Initializer;
+        frames: "all" | Initializer;
         outputType?: GifOutputType;
         quality?: number;
         cumulative?: boolean;
