@@ -3,8 +3,8 @@ import {Canvas} from "canvas"
 
 declare module "gif-frames" {
 
-    export default function gifFrames<T extends GifFrameOptions>(options: T): Promise<GifFrameData<T>>;
-    export default function gifFrames<T extends GifFrameOptions>(options: T, callback: (err: Error, frameData: GifFrameData<T>) => void): void;
+    export default function gifFrames<T extends GifFrameOptions>(options: T): Promise<GifFrameData<T>[]>;
+    export default function gifFrames<T extends GifFrameOptions>(options: T, callback: (err: Error, frameData: GifFrameData<T>[]) => void): void;
 
     type GifOutputType = "jpeg" | "jpg" | "gif" | "png" | "canvas";
     type GifFrameData<T extends GifFrameOptions> = T["outputType"] extends "canvas" ? GifFrameDataCanvas : GifFrameDataStream;
