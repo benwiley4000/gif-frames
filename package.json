@@ -3,6 +3,7 @@
   "version": "1.0.1",
   "description": "Pure JavaScript tool for extracting GIF frames and saving to file",
   "main": "gif-frames.js",
+  "types": "gif-frames.d.ts",
   "bundled": "dist/gif-frames.js",
   "bundled-min": "dist/gif-frames.min.js",
   "scripts": {
