@@ -8,7 +8,7 @@ declare module "gif-frames" {
     export default function gifFrames<T extends GifFrameOptions>(options: T, callback: (err: Error, frameData: GifFrameData<T>[]) => void): void;
 
     type GifOutputType = "jpeg" | "jpg" | "gif" | "png" | "canvas";
-    type GifFrameData<T extends GifFrameOptions> = T["outputType"] extends "canvas" ? GifFrameDataCanvas : GifFrameDataStream;
+    type GifFrameData<T extends GifFrameOptions> = T["outputType"] extends "canvas" ? GifFrameCanvas : GifFrameReadableStream;
 
     interface GifFrameOptions {
         url: string | Buffer;
@@ -18,13 +18,13 @@ declare module "gif-frames" {
         cumulative?: boolean;
     }
 
-    interface GifFrameDataCanvas {
+    interface GifFrameCanvas {
         getImage(): Canvas;
         frameIndex: number;
         frameInfo: GifFrameInfo
     }
 
-    interface GifFrameDataStream {
+    interface GifFrameReadableStream {
         getImage(): stream.Readable;
         frameIndex: number;
         frameInfo: GifFrameInfo
