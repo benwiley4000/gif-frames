@@ -2,6 +2,51 @@ var MultiRange = require('multi-integer-range').MultiRange;
 var getPixels = require('get-pixels-frame-info-update');
 var savePixels = require('save-pixels-jpeg-js-upgrade');
 
+function renderCumulativeFrames (frameData) {
+  if (frameData.length === 0) {
+    return frameData;
+  }
+  const previous = document.createElement("canvas");
+  const previousContext = previous.getContext("2d");
+  const current = document.createElement("canvas");
+  const currentContext = current.getContext("2d");
+
+  // Setting the canvas width will clear the canvas, so we only want to do it once.
+  const firstFrameCanvas = frameData[0].getImage();
+
+  // It also apperas that 'gif-frames' always returns a consistent sized canvas for all frames.
+  previous.width = firstFrameCanvas.width;
+  previous.height = firstFrameCanvas.height;
+  current.width = firstFrameCanvas.width;
+  current.height = firstFrameCanvas.height;
+
+  for (const frame of frameData) {
+    // Copy the current to the previous.
+    previousContext.clearRect(0, 0, previous.width, previous.height);
+    previousContext.drawImage(current, 0, 0);
+
+    // Draw the current frame to the cumulative buffer.
+    const canvas = frame.getImage();
+    const context = canvas.getContext("2d");
+    currentContext.drawImage(canvas, 0, 0);
+    context.clearRect(0, 0, canvas.width, canvas.height);
+    context.drawImage(current, 0, 0);
+
+    const {frameInfo} = frame;
+    const {disposal} = frameInfo;
+    // If the disposal method is clear to the background color, then clear the canvas.
+    if (disposal === 2) {
+      currentContext.clearRect(frameInfo.x, frameInfo.y, frameInfo.width, frameInfo.height);
+    // If the disposal method is reset to the previous, then copy the previous over the current.
+    } else if (disposal === 3) {
+      currentContext.clearRect(0, 0, current.width, current.height);
+      currentContext.drawImage(previous, 0, 0);
+    }
+    frame.getImage = () => canvas;
+  }
+  return frameData;
+};
+
 function nopromises () {
   throw new Error(
     'Promises not supported in your environment. ' +
@@ -52,7 +97,6 @@ function gifFrames (options, callback) {
   }
   var outputType = options.outputType || 'jpg';
   var quality = options.quality;
-  var cumulative = options.cumulative;
 
   var acceptedFrames = frames === 'all' ? 'all' : new MultiRange(frames);
 
@@ -69,7 +113,6 @@ function gifFrames (options, callback) {
       return;
     }
     var frameData = [];
-    var maxAccumulatedFrame = 0;
     for (var i = 0; i < pixels.shape[0]; i++) {
       if (acceptedFrames !== 'all' && !acceptedFrames.has(i)) {
         continue;
@@ -77,31 +120,6 @@ function gifFrames (options, callback) {
       (function (frameIndex) {
         frameData.push({
           getImage: function () {
-            if (cumulative && frameIndex > maxAccumulatedFrame) {
-              // for each frame, replace any invisible pixel with
-              // the corresponding pixel from the previous frame (beginning
-              // with the second frame).
-              // to avoid doing too much work at once we only compute the
-              // frames up to and including the requested frame.
-              var lastFrame = pixels.pick(maxAccumulatedFrame);
-              for (var f = maxAccumulatedFrame + 1; f <= frameIndex; f++) {
-                var frame = pixels.pick(f);
-                for (var x = 0; x < frame.shape[0]; x++) {
-                  for (var y = 0; y < frame.shape[1]; y++) {
-                    if (frame.get(x, y, 3) === 0) {
-                      // if alpha is fully transparent, use the pixel
-                      // from the last frame
-                      frame.set(x, y, 0, lastFrame.get(x, y, 0));
-                      frame.set(x, y, 1, lastFrame.get(x, y, 1));
-                      frame.set(x, y, 2, lastFrame.get(x, y, 2));
-                      frame.set(x, y, 3, lastFrame.get(x, y, 3));
-                    }
-                  }
-                }
-                lastFrame = frame;
-              }
-              maxAccumulatedFrame = frameIndex;
-            }
             return savePixels(pixels.pick(frameIndex), outputType, {
               quality: quality
             });
@@ -113,6 +131,9 @@ function gifFrames (options, callback) {
     }
     resolve(frameData);
   });
+
+  //  programatically fixes 
+  promise.then((frameData) => {return (renderCumulativeFrames(frameData))});
 
   return promise;
 }
