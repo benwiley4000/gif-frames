@@ -21,7 +21,7 @@ function gifFrames (options, callback) {
   var promise;
   var resolve;
   var reject;
-  if (typeof Promise === 'function') {
+  if (typeof callback === 'function') {
     promise = new Promise(function (_resolve, _reject) {
       resolve = function (res) {
         callback(null, res);
