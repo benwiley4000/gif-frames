@@ -1,5 +1,5 @@
 var MultiRange = require('multi-integer-range').MultiRange;
-var getPixels = require('get-pixels-frame-info-update');
+var getPixels = require('get-pixels');
 var savePixels = require('save-pixels-jpeg-js-upgrade');
 
 function nopromises () {
