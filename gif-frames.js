@@ -87,7 +87,7 @@ function gifFrames (options, callback) {
                 var frame = pixels.pick(f);
                 var disposal = framesInfo[f].disposal
 
-                if (disposal !== 3) {
+                if (disposal === 0 || disposal === 1) {
                   for (var x = 0; x < frame.shape[0]; x++) {
                     for (var y = 0; y < frame.shape[1]; y++) {
                       if (frame.get(x, y, 3) === 0) {
