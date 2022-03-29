@@ -52,7 +52,6 @@ function gifFrames (options, callback) {
   }
   var outputType = options.outputType || 'jpg';
   var quality = options.quality;
-  var cumulative = options.cumulative;
 
   var acceptedFrames = frames === 'all' ? 'all' : new MultiRange(frames);
 
@@ -77,7 +76,7 @@ function gifFrames (options, callback) {
       (function (frameIndex) {
         frameData.push({
           getImage: function () {
-            if (cumulative && frameIndex > maxAccumulatedFrame) {
+            if (frameIndex > maxAccumulatedFrame) {
               // for each frame, replace any invisible pixel with
               // the corresponding pixel from the previous frame (beginning
               // with the second frame).
@@ -86,15 +85,19 @@ function gifFrames (options, callback) {
               var lastFrame = pixels.pick(maxAccumulatedFrame);
               for (var f = maxAccumulatedFrame + 1; f <= frameIndex; f++) {
                 var frame = pixels.pick(f);
-                for (var x = 0; x < frame.shape[0]; x++) {
-                  for (var y = 0; y < frame.shape[1]; y++) {
-                    if (frame.get(x, y, 3) === 0) {
-                      // if alpha is fully transparent, use the pixel
-                      // from the last frame
-                      frame.set(x, y, 0, lastFrame.get(x, y, 0));
-                      frame.set(x, y, 1, lastFrame.get(x, y, 1));
-                      frame.set(x, y, 2, lastFrame.get(x, y, 2));
-                      frame.set(x, y, 3, lastFrame.get(x, y, 3));
+                var disposal = framesInfo[f].disposal
+
+                if (disposal !== 3) {
+                  for (var x = 0; x < frame.shape[0]; x++) {
+                    for (var y = 0; y < frame.shape[1]; y++) {
+                      if (frame.get(x, y, 3) === 0) {
+                        // if alpha is fully transparent, use the pixel
+                        // from the last frame
+                        frame.set(x, y, 0, lastFrame.get(x, y, 0));
+                        frame.set(x, y, 1, lastFrame.get(x, y, 1));
+                        frame.set(x, y, 2, lastFrame.get(x, y, 2));
+                        frame.set(x, y, 3, lastFrame.get(x, y, 3));
+                      }
                     }
                   }
                 }
