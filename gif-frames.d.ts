@@ -1,6 +1,4 @@
 import {Initializer} from "multi-integer-range";
-import {Canvas} from "canvas";
-import stream from "stream";
 
 declare module "gif-frames" {
 
@@ -15,17 +13,16 @@ declare module "gif-frames" {
         frames: "all" | Initializer;
         outputType?: GifOutputType;
         quality?: number;
-        cumulative?: boolean;
     }
 
     interface GifFrameCanvas {
-        getImage(): Canvas;
+        getImage(): HTMLCanvasElement;
         frameIndex: number;
         frameInfo: GifFrameInfo
     }
 
     interface GifFrameReadableStream {
-        getImage(): stream.Readable;
+        getImage(): NodeJS.ReadableStream;
         frameIndex: number;
         frameInfo: GifFrameInfo
     }
