@@ -37,7 +37,7 @@
   "dependencies": {
     "get-pixels-frame-info-update": "^3.3.2",
     "multi-integer-range": "^3.0.0",
-    "save-pixels-jpeg-js-upgrade": "git+https://github.com/peterfox1/save-pixels-node.git"
+    "save-pixels": "git+https://github.com/peterfox1/save-pixels-node.git"
   },
   "devDependencies": {
     "browserify": "^16.2.3",
